@@ -6,4 +6,6 @@ package com.huier.fw_realm;
  */
 
 public class Constants {
+    public static final String TAG = "tag";
+    public static final int INTERNET_REQUEST_CODE = 101;
 }

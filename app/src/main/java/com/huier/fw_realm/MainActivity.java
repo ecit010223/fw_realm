@@ -13,6 +13,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.huier.fw_realm.activity.DocumentActivity;
+import com.huier.fw_realm.activity.IntroExampleActivity;
+
+import io.realm.Realm;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
     private Button btnDocument,btnIntroExample;
@@ -39,24 +44,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(requestPermission()){
             switch (view.getId()){
                 case R.id.btn_document:
-                    document();
+                    DocumentActivity.entry(mContext);
                     break;
                 case R.id.btn_intro_example:
-                    introExample();
+                    IntroExampleActivity.entry(mContext);
                     break;
             }
         }else{
             mCurrrentClickView = view;
         }
-    }
-
-    /** 官方文档中的实例汇总 **/
-    private void document(){
-
-    }
-
-    private void introExample(){
-
     }
 
     @Override

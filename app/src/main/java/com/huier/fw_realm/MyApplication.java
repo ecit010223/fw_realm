@@ -2,6 +2,8 @@ package com.huier.fw_realm;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
+
 import io.realm.Realm;
 
 /**
@@ -15,5 +17,12 @@ public class MyApplication extends Application {
         super.onCreate();
         // Initialize Realm. Should only be done once when the application starts.
         Realm.init(this);
+
+        //Stetho初始化
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                        .build();
     }
 }
