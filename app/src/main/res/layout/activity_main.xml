@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_document"
+        style="@style/TextStyle"
+        android:text="官方文档中的实例"/>
+
+    <Button
+        android:id="@+id/btn_intro_example"
+        style="@style/TextStyle"
+        android:text="Intro Example"/>
+
+</LinearLayout>
