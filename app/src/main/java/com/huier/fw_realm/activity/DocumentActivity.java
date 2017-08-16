@@ -43,9 +43,14 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
         mContext = this;
+        initView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         // Get a Realm instance for this thread
         mRealm = Realm.getDefaultInstance();
-        initView();
     }
 
     private void initView(){

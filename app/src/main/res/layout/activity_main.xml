@@ -18,7 +18,12 @@
     <Button
         android:id="@+id/btn_query"
         style="@style/TextStyle"
-        android:text="查询"/>
+        android:text="查询相关操作"/>
+
+    <Button
+        android:id="@+id/btn_realm"
+        style="@style/TextStyle"
+        android:text="Realm分析"/>
 
     <Button
         android:id="@+id/btn_intro_example"
