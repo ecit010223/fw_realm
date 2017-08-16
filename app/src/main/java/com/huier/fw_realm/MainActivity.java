@@ -16,12 +16,13 @@ import android.widget.Button;
 import com.huier.fw_realm.activity.DemoActivity;
 import com.huier.fw_realm.activity.DocumentActivity;
 import com.huier.fw_realm.activity.IntroExampleActivity;
+import com.huier.fw_realm.activity.QueryActivity;
 
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
-    private Button btnDemo,btnDocument,btnIntroExample;
+    private Button btnDemo,btnDocument,btnIntroExample,btnQuery;
     /** 当前被点击的View **/
     private View mCurrrentClickView;
 
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDocument.setOnClickListener(this);
         btnIntroExample = (Button)findViewById(R.id.btn_intro_example);
         btnIntroExample.setOnClickListener(this);
+        btnQuery = (Button)findViewById(R.id.btn_query);
+        btnQuery.setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.id.btn_intro_example:
                     IntroExampleActivity.entry(mContext);
+                    break;
+                case R.id.btn_query:
+                    QueryActivity.entry(mContext);
                     break;
             }
         }else{

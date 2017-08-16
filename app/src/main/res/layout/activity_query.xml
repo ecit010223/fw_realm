@@ -6,8 +6,13 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_demo"
+        android:id="@+id/btn_basic_query"
         style="@style/TextStyle"
-        android:text="数据测试"/>
+        android:text="基本查询"/>
+
+    <Button
+        android:id="@+id/btn_logic_operator"
+        style="@style/TextStyle"
+        android:text="逻辑运算符"/>
 
 </LinearLayout>

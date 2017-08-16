@@ -13,7 +13,12 @@
     <Button
         android:id="@+id/btn_document"
         style="@style/TextStyle"
-        android:text="官方文档中的实例"/>
+        android:text="基本知识点"/>
+
+    <Button
+        android:id="@+id/btn_query"
+        style="@style/TextStyle"
+        android:text="查询"/>
 
     <Button
         android:id="@+id/btn_intro_example"

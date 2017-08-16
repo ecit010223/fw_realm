@@ -40,8 +40,4 @@
         style="@style/TextStyle"
         android:text="快照"/>
 
-    <Button
-        android:id="@+id/btn_query"
-        style="@style/TextStyle"
-        android:text="查询"/>
 </LinearLayout>

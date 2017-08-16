@@ -29,7 +29,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
     private Context mContext;
     private Realm mRealm;
     private Button btnWrite,btnDocSimple,btnCustomObject,btnLinkQuery,btnExecuteTransaction,
-            btnTransactionAsync, btnSnapshots,btnQuery;
+            btnTransactionAsync, btnSnapshots;
     /** 异步事务 **/
     private RealmAsyncTask mRealmAsyncTask;
 
@@ -63,8 +63,6 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
         btnTransactionAsync.setOnClickListener(this);
         btnSnapshots = (Button)findViewById(R.id.btn_snapshots);
         btnSnapshots.setOnClickListener(this);
-        btnQuery = (Button)findViewById(R.id.btn_query);
-        btnQuery.setOnClickListener(this);
     }
 
     @Override
@@ -90,9 +88,6 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_snapshots:
                 snapshots();
-                break;
-            case R.id.btn_query:
-                QueryActivity.entry(mContext);
                 break;
         }
     }
