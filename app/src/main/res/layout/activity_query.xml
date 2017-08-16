@@ -10,14 +10,4 @@
         style="@style/TextStyle"
         android:text="数据测试"/>
 
-    <Button
-        android:id="@+id/btn_document"
-        style="@style/TextStyle"
-        android:text="官方文档中的实例"/>
-
-    <Button
-        android:id="@+id/btn_intro_example"
-        style="@style/TextStyle"
-        android:text="Intro Example"/>
-
 </LinearLayout>

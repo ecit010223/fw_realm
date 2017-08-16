@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.huier.fw_realm.activity.DemoActivity;
 import com.huier.fw_realm.activity.DocumentActivity;
 import com.huier.fw_realm.activity.IntroExampleActivity;
 
@@ -20,7 +21,7 @@ import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
-    private Button btnDocument,btnIntroExample;
+    private Button btnDemo,btnDocument,btnIntroExample;
     /** 当前被点击的View **/
     private View mCurrrentClickView;
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView(){
+        btnDemo = (Button)findViewById(R.id.btn_demo);
+        btnDemo.setOnClickListener(this);
         btnDocument = (Button)findViewById(R.id.btn_document);
         btnDocument.setOnClickListener(this);
         btnIntroExample = (Button)findViewById(R.id.btn_intro_example);
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if(requestPermission()){
             switch (view.getId()){
+                case R.id.btn_demo:
+                    DemoActivity.entry(mContext);
+                    break;
                 case R.id.btn_document:
                     DocumentActivity.entry(mContext);
                     break;

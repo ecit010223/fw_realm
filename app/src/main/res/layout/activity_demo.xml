@@ -6,18 +6,17 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_demo"
+        android:id="@+id/btn_net_query"
         style="@style/TextStyle"
-        android:text="数据测试"/>
+        android:text="网络请求"/>
 
     <Button
-        android:id="@+id/btn_document"
+        android:id="@+id/btn_share"
         style="@style/TextStyle"
-        android:text="官方文档中的实例"/>
+        android:text="SharedPreferences"/>
 
     <Button
-        android:id="@+id/btn_intro_example"
+        android:id="@+id/btn_sqlite"
         style="@style/TextStyle"
-        android:text="Intro Example"/>
-
+        android:text="SQLite数据库"/>
 </LinearLayout>

@@ -25,6 +25,12 @@
         <activity
             android:name=".activity.DocumentActivity"
             android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.DemoActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.QueryActivity"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

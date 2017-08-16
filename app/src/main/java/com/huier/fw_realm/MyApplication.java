@@ -19,10 +19,6 @@ public class MyApplication extends Application {
         Realm.init(this);
 
         //Stetho初始化
-        Stetho.initialize(
-                Stetho.newInitializerBuilder(this)
-                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
-                        .build();
+        Stetho.initializeWithDefaults(this);
     }
 }

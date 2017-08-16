@@ -27,6 +27,7 @@ public class Person extends RealmObject {
     private String name;
     // Declare one-to-many relationships
     private RealmList<Dog> dogs;
+    private boolean invited;
 
     public Person(){
     }
@@ -58,5 +59,13 @@ public class Person extends RealmObject {
 
     public void setDogs(RealmList<Dog> dogs) {
         this.dogs = dogs;
+    }
+
+    public boolean isInvited() {
+        return invited;
+    }
+
+    public void setInvited(boolean invited) {
+        this.invited = invited;
     }
 }

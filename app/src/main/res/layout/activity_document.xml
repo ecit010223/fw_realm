@@ -6,6 +6,11 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/btn_write"
+        style="@style/TextStyle"
+        android:text="写入数据"/>
+
+    <Button
         android:id="@+id/btn_doc_simple"
         style="@style/TextStyle"
         android:text="简单使用"/>
@@ -19,4 +24,24 @@
         android:id="@+id/btn_link_query"
         style="@style/TextStyle"
         android:text="关联查询"/>
+
+    <Button
+        android:id="@+id/btn_execute_transaction"
+        style="@style/TextStyle"
+        android:text="executeTransaction()"/>
+
+    <Button
+        android:id="@+id/btn_transaction_async"
+        style="@style/TextStyle"
+        android:text="executeTransactionAsync()"/>
+
+    <Button
+        android:id="@+id/btn_snapshots"
+        style="@style/TextStyle"
+        android:text="快照"/>
+
+    <Button
+        android:id="@+id/btn_query"
+        style="@style/TextStyle"
+        android:text="查询"/>
 </LinearLayout>
