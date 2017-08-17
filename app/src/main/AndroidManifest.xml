@@ -45,6 +45,8 @@
         </activity>
         <activity android:name=".activity.RecyclerViewActivity">
         </activity>
+        <activity android:name=".activity.GridViewActivity">
+        </activity>
     </application>
 
 </manifest>
