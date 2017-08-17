@@ -139,17 +139,17 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
      * 个字符，操作如下
      */
     private void updateArrayItem(){
-//        mRealm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
 //                //先从realmObject中取出数组变量
 //                byte[] bytes = realmObject.binary;
 //                bytes[4] = 'a';
 //                //修改完成后，将结果赋值给realmObject中的相应数组变量
 //                realmObject.binary = bytes;
 //                //原因是Realm的MVCC架构需要在确定旧版本数据可以被舍弃之前仍然保留旧版本的数据。
-//            }
-//        });
+            }
+        });
     }
 
     /**
@@ -406,6 +406,8 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
     protected void onDestroy() {
         super.onDestroy();
         cancelAsyncTask();
+        if(mRealm!=null)
+            mRealm.close();
     }
 
     private void cancelAsyncTask(){

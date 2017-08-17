@@ -7,5 +7,6 @@
 
     <TextView
         style="@style/TextStyle"
-        android:text="Realm分析"/>
+        android:text="将JSON对象添加到Realm中"/>
+
 </LinearLayout>

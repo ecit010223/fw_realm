@@ -33,6 +33,18 @@
             android:launchMode="singleTop"/>
         <activity android:name=".activity.RealmActivity">
         </activity>
+        <activity android:name=".activity.ThreadActivity">
+        </activity>
+        <activity android:name=".activity.JsonActivity">
+        </activity>
+        <activity android:name=".activity.NotificationActivity">
+        </activity>
+        <activity android:name=".activity.MigrationActivity">
+        </activity>
+        <activity android:name=".activity.ListViewActivity">
+        </activity>
+        <activity android:name=".activity.RecyclerViewActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -16,6 +16,14 @@ import io.realm.RealmResults;
 
 /**
  * Realm.init(this)在Application的onCreate()执行，用于对Realm进行初始化，初始化操作只要进行一次。
+ * 自动更新(Auto-Refresh)
+ * 如果Realm实例存在于一个带有Looper的线程，那么这个Realm实例即具有自动更新的功能,这意味这如果发生了Realm数据库
+ * 的变化，那么该Realm实例会在下一个事件循环(event loop)中自动更新,这个便捷的功能使你不必花费太多的精力就能保证
+ * 的UI与数据的实时同步。
+ * 如果Realm的实例所在线程没有绑定Looper，那么该实例不会被更新直到你手动调用waitForChange()方法,请注意，不更新
+ * Realm以保持对旧数据的引用会造成而外的磁盘和内存开销,这也是为什么要在线程结束时调用close()关闭Realm实例的一个
+ * 重要原因。
+ * 如果你想确定当前Realm实例是否有自动更新功能，可以通过调用isAutoRefresh()方法查询。
  */
 public class RealmActivity extends AppCompatActivity {
     private Context mContext;
@@ -31,6 +39,11 @@ public class RealmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_realm);
         mContext = this;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         /**
          * 该静态方法会在当前线程返回一个Realm实例，它对应了Context.getFilesDir()目录中的default.realm文件。
          * 该文件位于应用的可写根目录中,默认情况下的Realm使用内部存储(internal storage)，应用并不需要取得任
@@ -39,6 +52,20 @@ public class RealmActivity extends AppCompatActivity {
          * Realm的实例是线程单例化的，也就是说，在同一个线程内多次调用静态方法获得针对同路径的Realm，会返回同一个Realm实例。
          */
         mRealm = Realm.getDefaultInstance();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /**
+         * Realm实现了Closeable接口以便与释放native内存和文件描述符，请务必在使用完毕后关闭Realm实例。Realm实
+         * 例是基于引用计数的,也就是说假设你在同一个线程中调用了getInstance()两次，你需要同样调用close()两次以
+         * 关闭该实例。举例来说，如果你需要实现Runnable，简单地在函数开始的时候调用getInstance()，在函数结束的
+         * 时候调用close()即可！
+         * 对于UI线程，你可以选择在onDestroy()方法内调用realm.close()。
+         */
+        if(mRealm != null)
+            mRealm.close();
     }
 
     /** 简单配置 **/

@@ -16,14 +16,21 @@ import android.widget.Button;
 import com.huier.fw_realm.activity.DemoActivity;
 import com.huier.fw_realm.activity.DocumentActivity;
 import com.huier.fw_realm.activity.IntroExampleActivity;
+import com.huier.fw_realm.activity.JsonActivity;
+import com.huier.fw_realm.activity.ListViewActivity;
+import com.huier.fw_realm.activity.MigrationActivity;
+import com.huier.fw_realm.activity.NotificationActivity;
 import com.huier.fw_realm.activity.QueryActivity;
 import com.huier.fw_realm.activity.RealmActivity;
+import com.huier.fw_realm.activity.RecyclerViewActivity;
+import com.huier.fw_realm.activity.ThreadActivity;
 
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
-    private Button btnDemo,btnDocument,btnIntroExample,btnQuery,btnRealm;
+    private Button btnDemo,btnDocument,btnIntroExample,btnQuery,btnRealm,btnThread,btnJson,
+            btnNotification,btnMigration,btnListview,btnRecyclerview;
     /** 当前被点击的View **/
     private View mCurrrentClickView;
 
@@ -46,6 +53,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnQuery.setOnClickListener(this);
         btnRealm = (Button)findViewById(R.id.btn_realm);
         btnRealm.setOnClickListener(this);
+        btnThread = (Button)findViewById(R.id.btn_thread);
+        btnThread.setOnClickListener(this);
+        btnJson = (Button)findViewById(R.id.btn_json);
+        btnJson.setOnClickListener(this);
+        btnNotification = (Button)findViewById(R.id.btn_notification);
+        btnNotification.setOnClickListener(this);
+        btnMigration = (Button)findViewById(R.id.btn_migration);
+        btnMigration.setOnClickListener(this);
+        btnListview = (Button)findViewById(R.id.btn_listvew);
+        btnListview.setOnClickListener(this);
+        btnRecyclerview = (Button)findViewById(R.id.btn_recyclerview);
+        btnRecyclerview.setOnClickListener(this);
     }
 
     @Override
@@ -66,6 +85,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.id.btn_realm:
                     RealmActivity.entry(mContext);
+                    break;
+                case R.id.btn_thread:
+                    ThreadActivity.entry(mContext);
+                    break;
+                case R.id.btn_json:
+                    JsonActivity.entry(mContext);
+                    break;
+                case R.id.btn_notification:
+                    NotificationActivity.entry(mContext);
+                    break;
+                case R.id.btn_migration:
+                    MigrationActivity.entry(mContext);
+                    break;
+                case R.id.btn_listvew:
+                    ListViewActivity.entry(mContext);
+                    break;
+                case R.id.btn_recyclerview:
+                    RecyclerViewActivity.entry(mContext);
                     break;
             }
         }else{

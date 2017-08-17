@@ -7,5 +7,6 @@
 
     <TextView
         style="@style/TextStyle"
-        android:text="Realm分析"/>
+        android:text="通知(Notifications)"/>
+
 </LinearLayout>

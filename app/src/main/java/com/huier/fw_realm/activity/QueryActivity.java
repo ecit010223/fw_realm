@@ -70,11 +70,18 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
     protected void onStop() {
         super.onStop();
         if(mAsyncResult!=null){
-            //步骤三：在退出 Activity 或者 Fragment 时移除监听器的注册以避免内存泄漏
+            //步骤三：在退出Activity或者Fragment时移除监听器的注册以避免内存泄漏
             mAsyncResult.removeChangeListener(callback); // remove a particular listener
             // or
             mAsyncResult.removeChangeListeners(); // remove all registered listeners
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mRealm != null)
+            mRealm.close();
     }
 
     /**
