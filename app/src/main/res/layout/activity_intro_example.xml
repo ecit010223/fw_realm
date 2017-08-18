@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.huier.fw_realm.activity.IntroExampleActivity">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_realm_to_json"
+        style="@style/TextStyle"
+        android:text="Serialize Realm objects to JSON using GSON"/>
+
+    <Button
+        android:id="@+id/btn_json_to_realm"
+        style="@style/TextStyle"
+        android:text="Realm, GSON and primitive JSON arrays"/>
+
+</LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.Button;
 
 import com.huier.fw_realm.activity.DemoActivity;
 import com.huier.fw_realm.activity.DocumentActivity;
+import com.huier.fw_realm.activity.GridViewActivity;
 import com.huier.fw_realm.activity.IntroExampleActivity;
 import com.huier.fw_realm.activity.JsonActivity;
 import com.huier.fw_realm.activity.ListViewActivity;
@@ -25,12 +26,10 @@ import com.huier.fw_realm.activity.RealmActivity;
 import com.huier.fw_realm.activity.RecyclerViewActivity;
 import com.huier.fw_realm.activity.ThreadActivity;
 
-import io.realm.Realm;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
     private Button btnDemo,btnDocument,btnIntroExample,btnQuery,btnRealm,btnThread,btnJson,
-            btnNotification,btnMigration,btnListview,btnRecyclerview;
+            btnNotification,btnMigration, btnListView, btnRecyclerView, btnGridView;
     /** 当前被点击的View **/
     private View mCurrrentClickView;
 
@@ -61,10 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnNotification.setOnClickListener(this);
         btnMigration = (Button)findViewById(R.id.btn_migration);
         btnMigration.setOnClickListener(this);
-        btnListview = (Button)findViewById(R.id.btn_listvew);
-        btnListview.setOnClickListener(this);
-        btnRecyclerview = (Button)findViewById(R.id.btn_recyclerview);
-        btnRecyclerview.setOnClickListener(this);
+        btnListView = (Button)findViewById(R.id.btn_listvew);
+        btnListView.setOnClickListener(this);
+        btnRecyclerView = (Button)findViewById(R.id.btn_recyclerview);
+        btnRecyclerView.setOnClickListener(this);
+        btnGridView = (Button)findViewById(R.id.btn_gridview);
+        btnGridView.setOnClickListener(this);
     }
 
     @Override
@@ -103,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.id.btn_recyclerview:
                     RecyclerViewActivity.entry(mContext);
+                    break;
+                case R.id.btn_gridview:
+                    GridViewActivity.entry(mContext);
                     break;
             }
         }else{

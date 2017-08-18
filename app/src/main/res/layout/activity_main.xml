@@ -62,6 +62,11 @@
         <Button
             android:id="@+id/btn_recyclerview"
             style="@style/TextStyle"
-            android:text="recyclerview结合Realm"/>
+            android:text="RecyclerView结合Realm"/>
+
+        <Button
+            android:id="@+id/btn_gridview"
+            style="@style/TextStyle"
+            android:text="GridView结合Realm"/>
     </LinearLayout>
 </ScrollView>

@@ -25,9 +25,11 @@ public class Person extends RealmObject {
     @PrimaryKey
     private long id;
     private String name;
+    private String age;
     // Declare one-to-many relationships
     private RealmList<Dog> dogs;
     private boolean invited;
+    private Dog favoriteDog;
 
     public Person(){
     }
@@ -53,6 +55,14 @@ public class Person extends RealmObject {
         this.name = name;
     }
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     public RealmList<Dog> getDogs() {
         return dogs;
     }
@@ -67,5 +77,13 @@ public class Person extends RealmObject {
 
     public void setInvited(boolean invited) {
         this.invited = invited;
+    }
+
+    public Dog getFavoriteDog() {
+        return favoriteDog;
+    }
+
+    public void setFavoriteDog(Dog favoriteDog) {
+        this.favoriteDog = favoriteDog;
     }
 }
