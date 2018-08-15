@@ -3,9 +3,8 @@ package com.huier.fw_realm.activity;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.AdapterView;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.BaseAdapter;
 
 import com.huier.fw_realm.R;
@@ -32,6 +31,7 @@ import io.realm.RealmResults;
  * 线程应刷新相应的控件,因为Realm的自动更新特性，无需重新查询数据。
  */
 public class ThreadActivity extends AppCompatActivity {
+    private static final String TAG = ThreadActivity.class.getSimpleName();
     private Realm mRealm;
     private RealmChangeListener<RealmResults<User>> mChangeListener;
     private BaseAdapter listAdapter;

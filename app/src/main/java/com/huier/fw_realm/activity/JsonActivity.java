@@ -25,6 +25,7 @@ import io.realm.Realm;
  * 3）使用不包含对应属性的JSON：该属性保持不变
  */
 public class JsonActivity extends AppCompatActivity {
+    private static final String TAG = JsonActivity.class.getSimpleName();
     private Realm mRealm;
 
     public static void entry(Context from){

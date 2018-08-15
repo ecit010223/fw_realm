@@ -2,19 +2,18 @@ package com.huier.fw_realm.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.huier.fw_realm.Constants;
 import com.huier.fw_realm.R;
 import com.huier.fw_realm.model.Dog;
 import com.huier.fw_realm.model.DogLink;
-import com.huier.fw_realm.model.Person;
 import com.huier.fw_realm.model.DogPublic;
+import com.huier.fw_realm.model.Person;
 import com.huier.fw_realm.model.PersonLink;
 import com.huier.fw_realm.model.User;
 
@@ -26,10 +25,9 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class DocumentActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = DocumentActivity.class.getSimpleName();
     private Context mContext;
     private Realm mRealm;
-    private Button btnWrite,btnDocSimple,btnCustomObject,btnLinkQuery,btnExecuteTransaction,
-            btnTransactionAsync, btnSnapshots;
     /** 异步事务 **/
     private RealmAsyncTask mRealmAsyncTask;
 
@@ -54,20 +52,13 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView(){
-        btnWrite = (Button)findViewById(R.id.btn_write);
-        btnWrite.setOnClickListener(this);
-        btnDocSimple = (Button)findViewById(R.id.btn_doc_simple);
-        btnDocSimple.setOnClickListener(this);
-        btnCustomObject = (Button)findViewById(R.id.btn_custom_object);
-        btnCustomObject.setOnClickListener(this);
-        btnLinkQuery = (Button)findViewById(R.id.btn_link_query);
-        btnLinkQuery.setOnClickListener(this);
-        btnExecuteTransaction = (Button)findViewById(R.id.btn_execute_transaction);
-        btnExecuteTransaction.setOnClickListener(this);
-        btnTransactionAsync = (Button)findViewById(R.id.btn_transaction_async);
-        btnTransactionAsync.setOnClickListener(this);
-        btnSnapshots = (Button)findViewById(R.id.btn_snapshots);
-        btnSnapshots.setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_write)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_doc_simple)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_custom_object)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_link_query)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_execute_transaction)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_transaction_async)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_snapshots)).setOnClickListener(this);
     }
 
     @Override
@@ -103,6 +94,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
      * 修改集合元素时，自动更新的特性会给你带来麻烦,例如：
      */
     private void snapshots(){
+        Log.d(TAG,"snapshots");
         RealmResults<Person> guests = mRealm.where(Person.class).equalTo("invited", false).findAll();
         mRealm.beginTransaction();
         for (int i = 0; i<guests.size(); i++) {
@@ -161,6 +153,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
      * 如果你在回调函数中更新UI，那么忘记取消异步事务可能会造成你的应用崩溃。
      */
     private void transactionAsync(){
+        Log.d(TAG,"transactionAsync");
         mRealmAsyncTask = mRealm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -186,6 +179,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
      * 还可以使用mRealm.executeTransaction()方法，它会自动处理写入事物的开始和提交，并在错误发生时取消写入事物。
      */
     private void executeTransaction(){
+        Log.d(TAG,"executeTransaction");
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -210,6 +204,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
      * U2   John    B,C,D
      */
     private void writeData(){
+        Log.d(TAG,"writeData");
         mRealm.beginTransaction();
         DogLink dogA = mRealm.createObject(DogLink.class);
         dogA.setId("A");
@@ -256,7 +251,8 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
 
     /** 关联查询 **/
     private void linkQuery(){
-        Log.d(Constants.TAG,"------------------------1-----------------------------");
+        Log.d(TAG,"linkQuery");
+        Log.d(TAG,"------------------------1-----------------------------");
         /**
          * 所有至少含有一个color为Brown的Person
          * 会查询出所有的PersonLink、所有的DogLink
@@ -266,7 +262,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
                 .findAll();
         showPersons(persons);
 
-        Log.d(Constants.TAG,"-------------------------2----------------------------");
+        Log.d(TAG,"-------------------------2----------------------------");
         /**
          * 列表中至少有一个Dog对象满足查询条件
          * 会查询出所有的PersonLink、所有的DogLink
@@ -276,7 +272,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
                 .findAll();
         showPersons(r1);
 
-        Log.d(Constants.TAG,"--------------------------3---------------------------");
+        Log.d(TAG,"--------------------------3---------------------------");
         /**
          * 建立在第一个的Person结果（r1）以及r1的每个Person的Dog列表之上
          * 会查询出所有的PersonLink、所有的DogLink
@@ -286,7 +282,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
                 .findAll();
         showPersons(r2);
 
-        Log.d(Constants.TAG,"--------------------------4---------------------------");
+        Log.d(TAG,"--------------------------4---------------------------");
         /**
          * 表示找到所有的Person他至少有一个Dog的名字为Fluffy,并且找到所有Person它至少有一个Dog的颜色是brown,
          * 然后返回这两个结果的交集.
@@ -301,7 +297,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
                 .findAll();
         showPersons(r3);
 
-        Log.d(Constants.TAG,"--------------------------5---------------------------");
+        Log.d(TAG,"--------------------------5---------------------------");
         /**
          * 找到所有的Person它至少有一个Dog的名字为Fluffy,然后在这个结果之上找到所有的Person它至少有一个Dog
          * 的颜色为Brown，最后在之前的结果之上找到所有的Person它至少有一个Dog的颜色为Yellow。
@@ -325,6 +321,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
 
     /** 定制对象 **/
     private void customObject(){
+        Log.d(TAG,"customObject");
         mRealm.executeTransaction(new Realm.Transaction(){
             @Override
             public void execute(Realm realm) {
@@ -337,12 +334,13 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
 
     /** 简单使用 **/
     private void docSimple(){
+        Log.d(TAG,"docSimple");
         Dog unmanagedDog = new Dog();
         unmanagedDog.setName("Rex");
         unmanagedDog.setAge(1);
         // Query Realm for all dogs younger than 2 years old
         final RealmResults<Dog> puppies = mRealm.where(Dog.class).lessThan("age",2).findAll();
-        Log.d(Constants.TAG,"out puppies.size():"+String.valueOf(puppies.size()));
+        Log.d(TAG,"out puppies.size():"+String.valueOf(puppies.size()));
 
         // Persist your data in a transaction
         mRealm.beginTransaction();
@@ -357,7 +355,7 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
         puppies.addChangeListener(new RealmChangeListener<RealmResults<Dog>>() {
             @Override
             public void onChange(RealmResults<Dog> element) {
-                Log.d(Constants.TAG,"RealmChangeListener puppies.size():"+puppies.size());
+                Log.d(TAG,"RealmChangeListener puppies.size():"+puppies.size());
             }
         });
 
@@ -376,9 +374,9 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
             public void onSuccess() {
                 // Original queries and Realm objects are automatically updated.
                 // 0 because there are no more puppies younger than 2 years old
-                Log.d(Constants.TAG,"OnSuccess() puppies.size():"+puppies.size());
+                Log.d(TAG,"OnSuccess() puppies.size():"+puppies.size());
                 // 3 the dogs age is updated
-                Log.d(Constants.TAG,"OnSuccess() managedDog.getAge():"+managedDog.getAge());
+                Log.d(TAG,"OnSuccess() managedDog.getAge():"+managedDog.getAge());
             }
         });
     }
@@ -387,11 +385,11 @@ public class DocumentActivity extends AppCompatActivity implements View.OnClickL
     private void showPersons(RealmResults<PersonLink> persons){
         for(int i=0;i<persons.size();i++){
             PersonLink person = persons.get(i);
-            Log.d(Constants.TAG,"id:"+person.getId()+",name:"+person.getName());
+            Log.d(TAG,"id:"+person.getId()+",name:"+person.getName());
             RealmList<DogLink> dogs = person.getDogs();
             for(int j=0;j<dogs.size();j++){
                 DogLink dog = dogs.get(j);
-                Log.d(Constants.TAG,"id:"+dog.getId()+",name:"+dog.getName()+",color"+dog.getColor());
+                Log.d(TAG,"id:"+dog.getId()+",name:"+dog.getName()+",color"+dog.getColor());
             }
         }
     }

@@ -35,6 +35,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class IntroExampleActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = IntroExampleActivity.class.getSimpleName();
     private Realm mRealm;
     private Button btnRealmToJson;
     private Button btnJsonToRealm;

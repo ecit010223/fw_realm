@@ -4,9 +4,11 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 import com.huier.fw_realm.model.Parent;
+import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+
 
 /**
  * 作者：张玉辉
@@ -19,6 +21,12 @@ public class MyApplication extends Application {
         super.onCreate();
         // Initialize Realm. Should only be done once when the application starts.
         Realm.init(this);
+        //数据库查看
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                        .build());
 
 //        RealmConfiguration configuration = new RealmConfiguration.Builder()
 //                .deleteRealmIfMigrationNeeded()

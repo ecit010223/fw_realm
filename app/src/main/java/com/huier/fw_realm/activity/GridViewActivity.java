@@ -29,6 +29,7 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 public class GridViewActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private static final String TAG = GridViewActivity.class.getSimpleName();
     private GridView mGridView;
     private CityAdapter mAdapter;
 

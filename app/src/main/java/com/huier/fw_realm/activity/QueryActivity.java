@@ -22,6 +22,8 @@ import io.realm.Sort;
  * Realm中的所有读取（包括查询）操作都是延迟执行的，且数据绝不会被拷贝。
  */
 public class QueryActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = QueryActivity.class.getSimpleName();
+
     private Context mContext;
     private Realm mRealm;
     private Button btnBasicQuery;
@@ -48,10 +50,8 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView(){
-        btnBasicQuery = (Button)findViewById(R.id.btn_basic_query);
-        btnBasicQuery.setOnClickListener(this);
-        btnLogicOperator = (Button)findViewById(R.id.btn_logic_operator);
-        btnLogicOperator.setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_basic_query)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_logic_operator)).setOnClickListener(this);
     }
 
     @Override

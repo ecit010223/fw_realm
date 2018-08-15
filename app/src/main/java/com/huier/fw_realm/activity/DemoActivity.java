@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.huier.fw_realm.Constants;
+import com.huier.fw_realm.Constant;
 import com.huier.fw_realm.R;
 import com.huier.fw_realm.sqlite.FeedReaderContract;
 import com.huier.fw_realm.sqlite.FeedReaderDbHelper;
@@ -25,11 +25,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static java.security.AccessController.getContext;
-
 public class DemoActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = DemoActivity.class.getSimpleName();
     private Context mContext;
-    private Button btnNetQuery,btnShare,btnSQLite;
     private FeedReaderDbHelper mDbHelper;
 
     public static void entry(Context from){
@@ -47,12 +45,9 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        btnNetQuery = (Button) findViewById(R.id.btn_net_query);
-        btnNetQuery.setOnClickListener(this);
-        btnShare = (Button) findViewById(R.id.btn_share);
-        btnShare.setOnClickListener(this);
-        btnSQLite = (Button) findViewById(R.id.btn_sqlite);
-        btnSQLite.setOnClickListener(this);
+        ((Button) findViewById(R.id.btn_net_query)).setOnClickListener(this);
+        ((Button) findViewById(R.id.btn_share)).setOnClickListener(this);
+        ((Button) findViewById(R.id.btn_sqlite)).setOnClickListener(this);
     }
 
     private void initData(){
@@ -92,8 +87,8 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     private void share(){
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(Constants.SHARE_ID,11);
-        editor.putString(Constants.SHARE_VALUE,"welcome");
+        editor.putInt(Constant.SHARE_ID,11);
+        editor.putString(Constant.SHARE_VALUE,"welcome");
         editor.commit();
     }
 
@@ -106,16 +101,16 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         okHttpClientBuilder.addNetworkInterceptor(new StethoInterceptor()).build();
 
         OkHttpClient okHttpClient = okHttpClientBuilder.build();
-        Request request = new Request.Builder().url(Constants.URL_RXJAVA).build();
+        Request request = new Request.Builder().url(Constant.URL_RXJAVA).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d(Constants.TAG, "网络请求失败");
+                Log.d(TAG, "网络请求失败");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d(Constants.TAG, response.body().string());
+                Log.d(TAG, response.body().string());
             }
         });
     }

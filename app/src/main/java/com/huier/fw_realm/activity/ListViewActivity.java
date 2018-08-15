@@ -19,6 +19,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class ListViewActivity extends AppCompatActivity {
+    private static final String TAG = ListViewActivity.class.getSimpleName();
     private Realm realm;
     private Menu menu;
     private ListViewAdapter adapter;

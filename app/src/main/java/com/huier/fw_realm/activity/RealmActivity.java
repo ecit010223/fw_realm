@@ -26,6 +26,7 @@ import io.realm.RealmResults;
  * 如果你想确定当前Realm实例是否有自动更新功能，可以通过调用isAutoRefresh()方法查询。
  */
 public class RealmActivity extends AppCompatActivity {
+    private static final String TAG = RealmActivity.class.getSimpleName();
     private Context mContext;
     private Realm mRealm;
 

@@ -2,11 +2,10 @@ package com.huier.fw_realm.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.huier.fw_realm.Constants;
 import com.huier.fw_realm.R;
 import com.huier.fw_realm.model.Dog;
 import com.huier.fw_realm.model.Person;
@@ -16,7 +15,6 @@ import io.realm.OrderedCollectionChangeSet;
 import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
-import io.realm.RealmModel;
 import io.realm.RealmObjectChangeListener;
 import io.realm.RealmResults;
 
@@ -35,6 +33,8 @@ import io.realm.RealmResults;
  * 数据不一定总是通过多个通知来送达侦听器，它们有可能被合并为一个通知送达。
  */
 public class NotificationActivity extends AppCompatActivity {
+    private static final String TAG = NotificationActivity.class.getSimpleName();
+
     private Realm mRealm;
     private RealmChangeListener mRealmChangeListener;
     private OrderedRealmCollectionChangeListener<RealmResults<Person>> mOrderedRealmCollectionChangeListener;
@@ -129,12 +129,12 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onChange(Dog object, ObjectChangeSet changeSet) {
                 if (changeSet.isDeleted()) {
-                    Log.i(Constants.TAG, "The dog was deleted");
+                    Log.i(TAG, "The dog was deleted");
                     return;
                 }
 
                 for (String fieldName : changeSet.getChangedFields()) {
-                    Log.i(Constants.TAG, "Field " + fieldName + " was changed.");
+                    Log.i(TAG, "Field " + fieldName + " was changed.");
 
                 }
             }

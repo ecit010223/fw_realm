@@ -19,6 +19,7 @@ import com.huier.fw_realm.model.Parent;
 import io.realm.Realm;
 
 public class RecyclerViewActivity extends AppCompatActivity {
+    private static final String TAG = RecyclerViewActivity.class.getSimpleName();
     private Realm realm;
     private RecyclerView recyclerView;
     private Menu menu;

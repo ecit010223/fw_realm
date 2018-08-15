@@ -2,8 +2,8 @@ package com.huier.fw_realm.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.huier.fw_realm.R;
 
@@ -11,7 +11,6 @@ import java.security.SecureRandom;
 
 import io.realm.DynamicRealm;
 import io.realm.FieldAttribute;
-import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmMigration;
 import io.realm.RealmSchema;
@@ -20,6 +19,7 @@ import io.realm.RealmSchema;
  *
  */
 public class MigrationActivity extends AppCompatActivity {
+    private static final String TAG = MigrationActivity.class.getSimpleName();
 
     public static void entry(Context from){
         Intent intent = new Intent(from,MigrationActivity.class);
