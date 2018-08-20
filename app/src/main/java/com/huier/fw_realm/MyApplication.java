@@ -3,11 +3,9 @@ package com.huier.fw_realm;
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
-import com.huier.fw_realm.model.Parent;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 
 /**
@@ -33,15 +31,15 @@ public class MyApplication extends Application {
 //                .build();
 //        Realm.setDefaultConfiguration(configuration);
 
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-                .initialData(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        realm.createObject(Parent.class);
-                    }})
-                .build();
-        Realm.deleteRealm(realmConfig); // Delete Realm between app restarts.
-        Realm.setDefaultConfiguration(realmConfig);
+//        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+//                .initialData(new Realm.Transaction() {
+//                    @Override
+//                    public void execute(Realm realm) {
+//                        realm.createObject(Parent.class);
+//                    }})
+//                .build();
+//        Realm.deleteRealm(realmConfig); // Delete Realm between app restarts.
+//        Realm.setDefaultConfiguration(realmConfig);
 
 
         //Stetho初始化

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,10 +25,7 @@ import io.realm.Sort;
 public class QueryActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = QueryActivity.class.getSimpleName();
 
-    private Context mContext;
     private Realm mRealm;
-    private Button btnBasicQuery;
-    private Button btnLogicOperator;
     private RealmResults<User> mAsyncResult;
 
     public static void entry(Context from){
@@ -39,7 +37,6 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query);
-        mContext = this;
         mRealm = Realm.getDefaultInstance();
         initView();
     }
@@ -86,16 +83,16 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * 异步查询
-     * 可以在Looper线程中使用异步查询,异步查询需要使用Handler来传递查询结果,在没有Looper的线程中使用异步查询
-     * 会导致IllegalStateException异常被抛出。
+     * 可以在Looper线程中使用异步查询,异步查询需要使用Handler来传递查询结果,在没有Looper的线程中
+     * 使用异步查询会导致IllegalStateException异常被抛出。
      */
     private void asynchronousQueries(){
         /**
          * 步骤一：创建异步查询
-         * 这里的调用并不会阻塞,而是立即返回一个RealmResults<User>,这类似于标准Java中Future的概念,查询将
-         * 会在后台线程中被执行,当其完成时,之前返回的RealmResults实例会被更新。
-         * 如果希望当查询完成、RealmResults被更新时获得通知,可以注册一个RealmChangeListener,这个监听器会
-         * 在RealmResults被更新时被调用(通常是在事务被提交后).
+         * 这里的调用并不会阻塞,而是立即返回一个RealmResults<User>,这类似于标准Java中Future的概念,
+         * 查询将会在后台线程中被执行,当其完成时,之前返回的RealmResults实例会被更新。
+         * 如果希望当查询完成、RealmResults被更新时获得通知,可以注册一个RealmChangeListener,这个监
+         * 听器会在RealmResults被更新时被调用（通常是在事务被提交后）。
          */
         mAsyncResult = mRealm.where(User.class)
                 .equalTo("name", "John")
@@ -141,18 +138,19 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
 
     /** 迭代 */
     private void iteration(){
-        //方式一
+        // 方式一
         RealmResults<User> results1 = mRealm.where(User.class).findAll();
         for (User u : results1) {
             // ... do something with the object ...
         }
-        //方式二
+        // 方式二
         RealmResults<User> results2 = mRealm.where(User.class).findAll();
         for (int i = 0; i < results2.size(); i++) {
             User u = results2.get(i);
             // ... do something with the object ...
         }
-        //RealmResults的自动更新会通过looper事件触发，但在事件到来之前，某些元素有可能不再满足查询条件或者其已被删除。
+        // RealmResults的自动更新会通过looper事件触发，但在事件到来之前，某些元素有可能不再满足
+        // 查询条件或者其已被删除。
         final RealmResults<User> users1 = getUsers();
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -164,7 +162,7 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
         for (User user : users1) {
             showUser(user); // Will crash for the deleted user
         }
-        //为避免该问题，可以使用RealmResults的deleteFromRealm(int)方法：
+        // 为避免该问题，可以使用RealmResults的deleteFromRealm(int)方法：
         final RealmResults<User> users2 = getUsers();
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -189,7 +187,8 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * RealmResults是对其所包含数据的自动更新视图，这意味着它永远不需要被重新查询获取,数据对象的改变会立刻被反映到相应的查询结果。
+     * RealmResults是对其所包含数据的自动更新视图，这意味着它永远不需要被重新查询获取,
+     * 数据对象的改变会立刻被反映到相应的查询结果。
      */
     private void autoUpdatingResults(){
         final RealmResults<Dog> puppies = mRealm.where(Dog.class).lessThan("age", 2).findAll();
@@ -225,14 +224,18 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
         Person firstJohn = teenagers.where()
                 .equalTo("name", "John")
                 .findFirst();
-        //也可以在子对象上使用链式查询
-        //可以查询找出所有年龄在13和20之间的Person并且他至少拥有一个1岁的Dog
+        /**
+         * 也可以在子对象上使用链式查询
+         * 可以查询找出所有年龄在13和20之间的Person并且他至少拥有一个1岁的Dog
+         */
         RealmResults<Person> teensWithPups = mRealm.where(Person.class)
                 .between("age", 13, 20)
                 .equalTo("dogs.age", 1)
                 .findAll();
-        //请注意，查询链最终是建立在RealmResults上而非RealmQuery，如果在某存在的RealmQuery上添加更多的查询
-        //条件，那么是在修改查询本身，而非查询链。
+        /**
+         * 请注意：查询链最终是建立在RealmResults上而非RealmQuery，如果在某存在的RealmQuery上添加
+         * 更多的查询条件，那么是在修改查询本身，而非查询链。
+         */
     }
 
     /**
@@ -252,7 +255,7 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * 每个查询条件都会被被隐式地被逻辑和（&）组合在一起，而逻辑或（or）需要显式地去执行or()。
+     * 每个查询条件都会被被隐式地被逻辑与(&)组合在一起，而逻辑或(or)需要显式地去执行or()。
      */
     private void logicOperator(){
         //可以将查询条件组合在一起，使用beginGroup()（相当于左括号）和endGroup()（相当于右括号）
@@ -265,8 +268,8 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
                 .endGroup()
                 .findAll();
         /**
-         * 可以用not()否定一个条件,该not()运算符可以与beginGroup()/endGroup()一起使用来否定子条件,例如想
-         * 查找所有名字不为“Peter”或“Jo”的User对象：
+         * 可以用not()否定一个条件,该not()运算符可以与beginGroup()/endGroup()一起使用来否定子条件,
+         * 例如想查找所有名字不为“Peter”或“Jo”的User对象：
          */
         RealmResults<User> r2 = mRealm.where(User.class)
                 .not()
@@ -287,10 +290,10 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
      * 查询返回一个RealmResults实例，其中包含名叫John和Peter的用户.
      * findAllSorted()：会返回一个排序后的结果集
      * findAllAsync()：会在后台线程异步进行查询
-     * 这些对象并不会被拷贝到集合中，也就是说你得到的是一个匹配对象引用的列表，你对匹配对象所有的操作都是直接施
-     * 加于它的原始对象，RealmResults继承自Java的AbstractList，行为类似，例如通过index来访问其中的某个对象。
-     * 当查询没有任何匹配时，返回的RealmResults对象将不会为null，取而代之的是它的size()方法将返回 0，修改或
-     * 删除RealmResults中任何一个对象都必须在写入事务中完成。
+     * 这些对象并不会被拷贝到集合中，也就是说你得到的是一个匹配对象引用的列表，你对匹配对象所有的操作
+     * 都是直接施加于它的原始对象，RealmResults继承自Java的AbstractList，行为类似，例如通过index来
+     * 访问其中的某个对象。当查询没有任何匹配时，返回的RealmResults对象将不会为null，取而代之的是它
+     * 的size()方法将返回0，修改或删除RealmResults中任何一个对象都必须在写入事务中完成。
      */
     private void basicQuery(){
         // Build the query looking at all users:
@@ -313,6 +316,7 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onChange(RealmResults<User> results) {
             // called once the query complete and on every update
+            Log.d(TAG,"RealmChangeListener.onChange");
         }
     };
 
@@ -322,6 +326,5 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void showUser(User user){
-
     }
 }

@@ -37,12 +37,12 @@
         <Button
             android:id="@+id/btn_json"
             style="@style/TextStyle"
-            android:text="将JSON对象添加到Realm"/>
+            android:text="Json与Realm之间转换1"/>
 
         <Button
-            android:id="@+id/btn_intro_example"
+            android:id="@+id/btn_json_2"
             style="@style/TextStyle"
-            android:text="Intro Example"/>
+            android:text="Json与Realm之间转换2"/>
 
         <Button
             android:id="@+id/btn_notification"

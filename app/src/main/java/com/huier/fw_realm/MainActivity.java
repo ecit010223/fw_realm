@@ -16,7 +16,7 @@ import android.widget.Button;
 import com.huier.fw_realm.activity.DemoActivity;
 import com.huier.fw_realm.activity.DocumentActivity;
 import com.huier.fw_realm.activity.GridViewActivity;
-import com.huier.fw_realm.activity.IntroExampleActivity;
+import com.huier.fw_realm.activity.Json2Activity;
 import com.huier.fw_realm.activity.JsonActivity;
 import com.huier.fw_realm.activity.ListViewActivity;
 import com.huier.fw_realm.activity.MigrationActivity;
@@ -28,10 +28,8 @@ import com.huier.fw_realm.activity.ThreadActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
-    private Button btnDemo,btnDocument,btnIntroExample,btnQuery,btnRealm,btnThread,btnJson,
-            btnNotification,btnMigration, btnListView, btnRecyclerView, btnGridView;
     /** 当前被点击的View **/
-    private View mCurrrentClickView;
+    private View mCurrentClickView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,30 +40,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView(){
-        btnDemo = (Button)findViewById(R.id.btn_demo);
-        btnDemo.setOnClickListener(this);
-        btnDocument = (Button)findViewById(R.id.btn_document);
-        btnDocument.setOnClickListener(this);
-        btnIntroExample = (Button)findViewById(R.id.btn_intro_example);
-        btnIntroExample.setOnClickListener(this);
-        btnQuery = (Button)findViewById(R.id.btn_query);
-        btnQuery.setOnClickListener(this);
-        btnRealm = (Button)findViewById(R.id.btn_realm);
-        btnRealm.setOnClickListener(this);
-        btnThread = (Button)findViewById(R.id.btn_thread);
-        btnThread.setOnClickListener(this);
-        btnJson = (Button)findViewById(R.id.btn_json);
-        btnJson.setOnClickListener(this);
-        btnNotification = (Button)findViewById(R.id.btn_notification);
-        btnNotification.setOnClickListener(this);
-        btnMigration = (Button)findViewById(R.id.btn_migration);
-        btnMigration.setOnClickListener(this);
-        btnListView = (Button)findViewById(R.id.btn_listvew);
-        btnListView.setOnClickListener(this);
-        btnRecyclerView = (Button)findViewById(R.id.btn_recyclerview);
-        btnRecyclerView.setOnClickListener(this);
-        btnGridView = (Button)findViewById(R.id.btn_gridview);
-        btnGridView.setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_demo)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_document)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_json_2)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_query)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_realm)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_thread)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_json)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_notification)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_migration)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_listvew)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_recyclerview)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_gridview)).setOnClickListener(this);
     }
 
     @Override
@@ -78,9 +64,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.btn_document:
                     DocumentActivity.entry(mContext);
                     break;
-                case R.id.btn_intro_example:
-                    IntroExampleActivity.entry(mContext);
-                    break;
                 case R.id.btn_query:
                     QueryActivity.entry(mContext);
                     break;
@@ -92,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case R.id.btn_json:
                     JsonActivity.entry(mContext);
+                    break;
+                case R.id.btn_json_2:
+                    Json2Activity.entry(mContext);
                     break;
                 case R.id.btn_notification:
                     NotificationActivity.entry(mContext);
@@ -110,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
             }
         }else{
-            mCurrrentClickView = view;
+            mCurrentClickView = view;
         }
     }
 
@@ -120,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(requestCode){
             case Constant.INTERNET_REQUEST_CODE:
                 if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                    onClick(mCurrrentClickView);
+                    onClick(mCurrentClickView);
                 }
                 break;
         }

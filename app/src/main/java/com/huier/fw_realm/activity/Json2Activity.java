@@ -34,30 +34,26 @@ import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 
-public class IntroExampleActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = IntroExampleActivity.class.getSimpleName();
+public class Json2Activity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = Json2Activity.class.getSimpleName();
     private Realm mRealm;
-    private Button btnRealmToJson;
-    private Button btnJsonToRealm;
 
     public static void entry(Context from){
-        Intent intent = new Intent(from,IntroExampleActivity.class);
+        Intent intent = new Intent(from,Json2Activity.class);
         from.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro_example);
+        setContentView(R.layout.activity_json_2);
         mRealm = Realm.getDefaultInstance();
         initView();
     }
 
     private void initView(){
-        btnRealmToJson = (Button)findViewById(R.id.btn_realm_to_json);
-        btnRealmToJson.setOnClickListener(this);
-        btnJsonToRealm = (Button)findViewById(R.id.btn_json_to_realm);
-        btnJsonToRealm.setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_realm_to_json)).setOnClickListener(this);
+        ((Button)findViewById(R.id.btn_json_to_realm)).setOnClickListener(this);
     }
 
     @Override

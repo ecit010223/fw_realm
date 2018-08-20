@@ -16,13 +16,13 @@ import java.io.InputStream;
 import io.realm.Realm;
 
 /**
- * 可以直接将JSON对象添加到Realm中,这些JSON对象可以是一个String、一个JSONObject或者是一个InputStream,Realm会
- * 忽略JSON中存在但未定义在Realm模型类里的字段,单独对象可以通过Realm.createObjectFromJson()添加,对象列表可以通
- * 过Realm.createAllFromJson()添加。
+ * 可以直接将JSON对象添加到Realm中,这些JSON对象可以是一个String、一个JSONObject或者是一个InputStream,
+ * Realm会忽略JSON中存在但未定义在Realm模型类里的字段,单独对象可以通过Realm.createObjectFromJson()
+ * 添加,对象列表可以通过Realm.createAllFromJson()添加。
  * Realm 解析 JSON 时遵循如下规则:
- * 1）对于包含空值(null)的JSON创建对象:对于非必须(可为空值的属性),设置其值为null;对于必须(不可为空值的属性)抛出异常;
- * 2）使用包含空值(null)的JSON更新对象:对于非必须(可为空值的属性),设置其值为null;对于必须(不可为空值的属性)抛出异常;
- * 3）使用不包含对应属性的JSON：该属性保持不变
+ * 1）对于包含空值(null)的JSON创建对象:对于可为空值的属性,设置其值为null;对于不可为空值的属性抛出异常;
+ * 2）使用包含空值(null)的JSON更新对象:对于可为空值的属性,设置其值为null;对于不可为空值的属性抛出异常;
+ * 3）使用不包含对应属性的JSON：该属性保持不变。
  */
 public class JsonActivity extends AppCompatActivity {
     private static final String TAG = JsonActivity.class.getSimpleName();
